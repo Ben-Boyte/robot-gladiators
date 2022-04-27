@@ -68,7 +68,6 @@ else {
 
   if (playerHealth <= 0) {
     window.alert(playerName + " has died!");
-    window.alert("You have lost your robot in battle! Game Over!");
     break;
   } 
   else {
@@ -78,6 +77,10 @@ else {
 }
 
 var startGame = function() {
+  playerHealth = 100;
+  playerAttack = 10;
+  playerMoney = 10;
+  
 for(var i = 0; i < enemyNames.length; i++) {
   if (playerHealth > 0) {
     window.alert("Welcome to Robot Gladiators! Round " + (i + 1) );
