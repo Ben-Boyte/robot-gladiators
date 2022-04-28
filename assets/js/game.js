@@ -9,27 +9,46 @@
 //}
 
 
+var fightOrSkip = function() {
+  
+  var promptFight = window.prompt('Would you like to FIGHT or SKIP this battle? Enter "FIGHT" or "SKIP" to choose.');
+
+  if (promptFight === "" || promptFight === null) {
+    window.alert("You need to provide a valid answer! Please try again.");
+    return fightOrSkip();
+  }
+
+  promptFight = promptFight.toLowerCase();
+
+  if (promptFight === "skip") {
+
+    var confirmSkip = window.confirm("Are you sure you'd like to quit?");
+
+
+    if (confirmSkip) {
+      window.alert(playerInfo.name + " has decided to skip this fight. Goodbye!");
+
+      playerInfo.money = Math.max(0, playerInfo.money - 10);
+    
+      return true;
+      
+    }
+    return false;
+  }
+}
+
 
 var fight = function(enemy) {
 
    
-  while(enemy.health > 0 && enemy.health > 0){
+  while(playerInfo.health > 0 && enemy.health > 0){
 
-  var promptFight = window.prompt("Would you like to FIGHT or SKIP this battle? Enter 'FIGHT' or 'SKIP' to choose.");
-
-  if (promptFight === "skip" || promptFight === "SKIP") {
-    // confirm player wants to skip
-    var confirmSkip = window.confirm("Are you sure you'd like to quit?");
-  
-    // if yes (true), leave fight
-    if (confirmSkip) {
-      window.alert(playerInfo.name + " has decided to skip this fight. Goodbye!");
-      
-      playerInfo.money = Math.max(0, playerInfo.money - 10);
-      console.log("playerInfo.money", playerInfo.money)
+    if (fightOrSkip()) {
+      // if true, leave fight by breaking loop
       break;
     }
-  }
+    var damage = randomNumber(playerInfo.attack - 3, playerInfo.attack);
+  
 
 if (promptFight === "fight" || promptFight === "FIGHT") {
  
